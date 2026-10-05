@@ -6,7 +6,7 @@ services:
     container_name: banpara-solucoes
     restart: unless-stopped
     ports:
-      - "${PORT:-80}:80"
+      - "${PORT:-8085}:80"
     environment:
       - VIRTUAL_HOST=banparasolucoes.klynner.com.br
       - LETSENCRYPT_HOST=banparasolucoes.klynner.com.br
