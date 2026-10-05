@@ -1,0 +1,13 @@
+{
+  "name": "banpara-solucoes",
+  "version": "1.0.0",
+  "description": "Banpará - Portal de Soluções e Atendimento",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["banpara", "prototipo", "portal"],
+  "author": "",
+  "license": "ISC"
+}

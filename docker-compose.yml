@@ -1,0 +1,17 @@
+services:
+  banpara-portal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: banpara-solucoes
+    restart: unless-stopped
+    ports:
+      - "${PORT:-80}:80"
+    environment:
+      - VIRTUAL_HOST=banparasolucoes.klynner.com.br
+      - LETSENCRYPT_HOST=banparasolucoes.klynner.com.br
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:80/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
