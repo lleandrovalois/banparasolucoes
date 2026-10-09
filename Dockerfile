@@ -8,11 +8,9 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copia arquivos estáticos da aplicação
 COPY index.html /usr/share/nginx/html/
-COPY banpara_icon.png /usr/share/nginx/html/
-COPY banpara_icon.svg /usr/share/nginx/html/
-COPY banpara_logo.png /usr/share/nginx/html/
-COPY banpara_logo.svg /usr/share/nginx/html/
-COPY banpara_logo_white.png /usr/share/nginx/html/
+COPY *.png /usr/share/nginx/html/
+COPY *.svg /usr/share/nginx/html/
+COPY *.jpg /usr/share/nginx/html/
 
 # Expõe a porta 80
 EXPOSE 80

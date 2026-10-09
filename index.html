@@ -98,12 +98,45 @@
                 transform: translateY(0);
             }
         }
+
+        @keyframes iviFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .ivi-floating {
+            animation: iviFloat 3.2s ease-in-out infinite;
+        }
     </style>
 </head>
 
 <body class="min-h-screen flex flex-col justify-between selection:bg-bp-red selection:text-white">
 
     <header class="w-full bg-white z-50 sticky top-0 shadow-sm border-b border-bp-border">
+        <!-- Barra de Acessibilidade e Utilidades Oficial Banpará (Apenas no Portal do Usuário) -->
+        <div id="portal-top-utility-bar" class="w-full bg-[#F4F6F9] border-b border-slate-200/80 text-[11px] text-slate-600 transition-all select-none">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8 py-1.5 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <button type="button" onclick="abrirDemonstracaoVLibras('Bem-vindo ao Portal de Soluções e Relacionamento Banpará.')" class="flex items-center gap-1.5 text-slate-700 hover:text-bp-royal font-semibold transition-colors cursor-pointer group" title="Ativar acessibilidade em Língua Brasileira de Sinais">
+                        <span class="text-sm">♿</span>
+                        <span class="group-hover:underline">Acessibilidade em Libras</span>
+                        <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-1.5 py-0.2 rounded-full">VLibras</span>
+                    </button>
+                </div>
+                <div class="flex items-center gap-4 text-[11px]">
+                    <span class="hidden md:inline text-slate-400">Atendimento Oficial Banpará</span>
+                    <a href="tel:08002806605" class="flex items-center gap-1 text-slate-600 hover:text-bp-royal font-medium transition-colors">
+                        <span>📞</span>
+                        <span>Fale Conosco: <strong>0800 280 6605</strong></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between">
             <!-- Marca Institucional Banpará Oficial -->
             <a href="javascript:void(0)" onclick="showView('view-home')"
@@ -3577,6 +3610,302 @@
         <span id="toast-text">Copiado para a área de transferência!</span>
     </div>
 
+    <!-- ======================================================== -->
+    <!-- PLUGIN VLIBRAS - DEMONSTRAÇÃO DE ACESSIBILIDADE EM LIBRAS -->
+    <!-- Disponível exclusivamente no Portal do Usuário (Oculto no CRM) -->
+    <!-- ======================================================== -->
+
+    <!-- 1. ABA FLUTUANTE LATERAL (Fiel à Imagem 1) -->
+    <div id="vlibras-demo-launcher"
+        class="fixed right-0 top-1/2 -translate-y-1/2 z-40 group flex items-center cursor-pointer transition-transform duration-300 hover:-translate-x-1 select-none"
+        onclick="toggleVLibrasWidget(true)"
+        title="Acessível em Libras (VLibras) - Clique para abrir o intérprete virtual">
+        
+        <!-- Aba azul com texto e ícone de equipe de intérpretes -->
+        <div class="hidden sm:flex items-center bg-[#0056B3] hover:bg-[#004494] text-white pl-2 pr-3 py-2 rounded-l-2xl shadow-lg border-y border-l border-white/20 transition-all duration-200">
+            <svg class="w-3.5 h-3.5 text-blue-200 mr-1.5 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+            </svg>
+            <div class="w-6 h-6 rounded-full overflow-hidden border border-white/40 mr-2 flex-shrink-0 bg-blue-700 shadow-xs">
+                <img src="vlibras_avatar_1.jpg" alt="Avatar VLibras" class="w-full h-full object-cover object-top" />
+            </div>
+            <span class="text-xs font-bold tracking-tight text-white whitespace-nowrap">Acessível com VLibras</span>
+        </div>
+
+        <!-- Botão com o ícone oficial de mãos do VLibras -->
+        <div class="w-11 h-11 sm:w-12 sm:h-12 bg-[#0056B3] hover:bg-[#004494] text-white flex items-center justify-center rounded-l-xl sm:rounded-l-none shadow-lg border-y border-l border-white/20">
+            <svg class="w-7 h-7 text-white" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M48 20 C46 20 44 22 44 25 L44 48 C44 49 43 50 42 50 C41 50 40 49 40 48 L40 28 C40 25 38 23 35 23 C32 23 30 25 30 28 L30 48 C30 49 29 50 28 50 C27 50 26 49 26 48 L26 35 C26 32 24 30 21 30 C18 30 16 32 16 35 L16 58 C16 72 26 84 40 85 C42 85 45 84 47 82 L52 76 C54 73 55 70 55 66 L55 25 C55 22 52 20 48 20 Z" opacity="0.95"/>
+                <path d="M52 20 C54 20 56 22 56 25 L56 48 C56 49 57 50 58 50 C59 50 60 49 60 48 L60 28 C60 25 62 23 65 23 C68 23 70 25 70 28 L70 48 C70 49 71 50 72 50 C73 50 74 49 74 48 L74 35 C74 32 76 30 79 30 C82 30 84 32 84 35 L84 58 C84 72 74 84 60 85 C58 85 55 84 53 82 L48 76 C46 73 45 70 45 66 L45 25 C45 22 48 20 52 20 Z" opacity="0.85"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- 2. PLAYER MODAL DO VLIBRAS (Fiel à Imagem 2) -->
+    <div id="vlibras-player-modal"
+        class="fixed right-3 sm:right-6 top-16 sm:top-20 z-50 w-[350px] sm:w-[380px] max-w-[calc(100vw-24px)] bg-white rounded-2xl shadow-2xl border border-blue-200/90 overflow-hidden flex flex-col hidden transition-all duration-300">
+        
+        <!-- Top Bar / Header VLibras (Azul #1351B4 fiel à Imagem 2) -->
+        <div class="bg-[#1351B4] text-white px-3.5 py-2.5 flex items-center justify-between select-none shadow-sm">
+            <div class="flex items-center gap-2">
+                <!-- Menu Hambúrguer -->
+                <button type="button" onclick="toggleVLibrasMenu(event)" class="text-white hover:bg-white/20 p-1 rounded-lg transition-colors cursor-pointer" title="Menu de Opções VLibras">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                
+                <!-- Logo VLibras com ícone de mãos -->
+                <div class="flex items-center gap-1.5 font-bold tracking-tight text-sm">
+                    <div class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center p-0.5">
+                        <svg class="w-3.5 h-3.5 text-white" viewBox="0 0 100 100" fill="currentColor">
+                            <path d="M48 20 C46 20 44 22 44 25 L44 48 C44 49 43 50 42 50 C41 50 40 49 40 48 L40 28 C40 25 38 23 35 23 C32 23 30 25 30 28 L30 48 C30 49 29 50 28 50 C27 50 26 49 26 48 L26 35 C26 32 24 30 21 30 C18 30 16 32 16 35 L16 58 C16 72 26 84 40 85 C42 85 45 84 47 82 L52 76 C54 73 55 70 55 66 L55 25 C55 22 52 20 48 20 Z"/>
+                            <path d="M52 20 C54 20 56 22 56 25 L56 48 C56 49 57 50 58 50 C59 50 60 49 60 48 L60 28 C60 25 62 23 65 23 C68 23 70 25 70 28 L70 48 C70 49 71 50 72 50 C73 50 74 49 74 48 L74 35 C74 32 76 30 79 30 C82 30 84 32 84 35 L84 58 C84 72 74 84 60 85 C58 85 55 84 53 82 L48 76 C46 73 45 70 45 66 L45 25 C45 22 48 20 52 20 Z"/>
+                        </svg>
+                    </div>
+                    <span class="tracking-normal text-[15px]">VLibras</span>
+                </div>
+            </div>
+
+            <!-- Ações do Cabeçalho: Expandir e Fechar -->
+            <div class="flex items-center gap-1">
+                <button type="button" onclick="toggleVLibrasTamanho()" class="text-white/80 hover:text-white hover:bg-white/20 p-1.5 rounded-lg transition-colors cursor-pointer" title="Maximizar/Normalizar janela">
+                    <svg id="vlibras-icon-expand" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
+                </button>
+                <button type="button" onclick="fecharDemonstracaoVLibras()" class="text-white/80 hover:text-white hover:bg-white/20 p-1.5 rounded-lg transition-colors cursor-pointer" title="Fechar intérprete">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dropdown de Opções (Menu Hambúrguer) -->
+        <div id="vlibras-dropdown-menu" class="hidden bg-slate-900 text-white text-xs divide-y divide-slate-800 shadow-xl border-b border-blue-500/20">
+            <div class="p-2.5 space-y-1.5">
+                <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Trocar Intérprete 3D</div>
+                <div class="grid grid-cols-2 gap-1.5">
+                    <button type="button" onclick="trocarAvatarVLibras('icaro')" id="btn-avatar-icaro" class="px-2 py-1.5 rounded bg-blue-600 text-white font-semibold text-center hover:bg-blue-500 cursor-pointer flex items-center justify-center gap-1">
+                        <span>👨 Ícaro</span>
+                    </button>
+                    <button type="button" onclick="trocarAvatarVLibras('hozana')" id="btn-avatar-hozana" class="px-2 py-1.5 rounded bg-slate-800 text-slate-300 font-semibold text-center hover:bg-slate-700 cursor-pointer flex items-center justify-center gap-1">
+                        <span>👩 Hozana</span>
+                    </button>
+                </div>
+            </div>
+            <div class="p-2.5 space-y-1.5">
+                <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Exemplos do Portal Banpará</div>
+                <div class="flex flex-col gap-1 text-[11px]">
+                    <button type="button" onclick="traduzirTextoVLibras('Informamos que sua conta é coberta pelo FGC.')" class="text-left text-slate-300 hover:text-cyan-300 py-0.5 truncate hover:underline cursor-pointer">
+                        • "Sua conta é coberta pelo FGC."
+                    </button>
+                    <button type="button" onclick="traduzirTextoVLibras('Chega de atraso. Volte a sorrir. Negocie débitos com o Banpará.')" class="text-left text-slate-300 hover:text-cyan-300 py-0.5 truncate hover:underline cursor-pointer">
+                        • "Chega de atraso. Volte a sorrir."
+                    </button>
+                    <button type="button" onclick="traduzirTextoVLibras('Portal de Relacionamento e Soluções Banpará')" class="text-left text-slate-300 hover:text-cyan-300 py-0.5 truncate hover:underline cursor-pointer">
+                        • "Portal de Soluções Banpará"
+                    </button>
+                </div>
+            </div>
+            <div class="p-2 bg-slate-950/70 text-[10px] text-slate-400 flex items-center justify-between">
+                <span>Dica: Selecione qualquer texto do portal</span>
+                <span class="text-cyan-400 font-semibold">100% Interativo</span>
+            </div>
+        </div>
+
+        <!-- Viewport do Avatar 3D (Fiel à Imagem 2) -->
+        <div id="vlibras-avatar-viewport" class="relative bg-gradient-to-b from-[#F7FAFC] via-[#EEF3F8] to-[#E2E8F0] h-[370px] overflow-hidden flex items-center justify-center select-none">
+            
+            <!-- Imagem do Avatar Renderizado com Micro-Animação de Sinais -->
+            <div id="vlibras-avatar-wrapper" class="relative w-full h-full flex items-center justify-center transition-transform duration-500">
+                <img id="vlibras-avatar-img" src="vlibras_avatar_1.jpg" alt="Intérprete em Libras" class="h-full w-full object-contain object-bottom select-none transition-all duration-300 pointer-events-none" />
+            </div>
+
+            <!-- Indicador Flutuante de Legenda / Subtítulo Ativo -->
+            <div id="vlibras-legenda-container" class="absolute top-3 inset-x-3 pointer-events-none transition-opacity duration-300">
+                <div class="bg-slate-950/85 backdrop-blur-md text-white text-[11px] font-medium px-3 py-1.5 rounded-xl shadow-lg border border-white/10 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping flex-shrink-0"></span>
+                    <span id="vlibras-legenda-texto" class="truncate leading-tight">Olá! Sou seu intérprete virtual em Libras.</span>
+                </div>
+            </div>
+
+            <!-- Dica de Interatividade Flutuante -->
+            <div id="vlibras-hint" class="absolute top-12 right-3 text-[10px] bg-blue-900/80 text-blue-100 px-2 py-0.5 rounded-full pointer-events-none shadow-sm transition-opacity duration-500 opacity-90">
+                <span>Clique em qualquer texto do site</span>
+            </div>
+
+            <!-- Botão Pular (Exatamente como na Imagem 2) -->
+            <button type="button" id="vlibras-btn-skip" onclick="pularSinalizacaoVLibras()" class="absolute bottom-3 right-3 bg-white hover:bg-slate-50 text-slate-800 text-xs font-semibold px-2.5 py-1 rounded-md shadow-md border border-slate-200 flex items-center gap-1.5 transition-all cursor-pointer active:scale-95" title="Pular frase atual">
+                <svg class="w-3.5 h-3.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4.5 5.5v9l7-4.5-7-4.5zm8 0v9h2v-9h-2z" />
+                </svg>
+                <span>Pular</span>
+            </button>
+        </div>
+
+        <!-- Barra de Progresso e Player Controls (Fiel à Imagem 2) -->
+        <div class="w-full bg-white border-t border-slate-200">
+            <!-- Linha da Barra de Progresso -->
+            <div class="w-full h-1 bg-slate-200 overflow-hidden cursor-pointer" onclick="seekVLibrasProgress(event)">
+                <div id="vlibras-progress-bar" class="h-full bg-blue-600 w-0 transition-all duration-200"></div>
+            </div>
+
+            <!-- Controles Inferiores (Fiel à Imagem 2) -->
+            <div class="px-3.5 py-2 flex items-center justify-between text-slate-600 select-none">
+                <!-- Play/Pause -->
+                <button type="button" id="vlibras-btn-play" onclick="togglePlayPauseVLibras()" class="hover:text-blue-600 p-1.5 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer" title="Pausar / Reproduzir">
+                    <svg id="vlibras-icon-play" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                    </svg>
+                    <svg id="vlibras-icon-pause" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <!-- Velocidade (1x / 1.5x / 2x / 0.5x) -->
+                <button type="button" id="vlibras-btn-speed" onclick="ciclarVelocidadeVLibras()" class="text-xs font-black tracking-tight hover:text-blue-600 px-2 py-1 rounded-md hover:bg-blue-50 transition-colors cursor-pointer" title="Velocidade da interpretação">
+                    <span id="vlibras-speed-label">1x</span>
+                </button>
+
+                <!-- Expressão Facial / Emoção -->
+                <button type="button" id="vlibras-btn-emotion" onclick="toggleEmocaoVLibras()" class="text-base hover:scale-110 p-1 rounded-lg hover:bg-blue-50 transition-all cursor-pointer" title="Alternar expressão facial do intérprete">
+                    <span id="vlibras-emotion-icon">😊</span>
+                </button>
+
+                <!-- Legendas / Subtítulo Toggle -->
+                <button type="button" id="vlibras-btn-captions" onclick="toggleLegendaVLibras()" class="hover:text-blue-600 p-1.5 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer" title="Exibir / Ocultar legendas">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                    </svg>
+                </button>
+
+                <!-- Configurações Gear -->
+                <button type="button" id="vlibras-btn-settings" onclick="toggleVLibrasMenu(event)" class="hover:text-blue-600 p-1.5 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer" title="Configurações">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. SCRIPT OFICIAL VLIBRAS (Progressive Enhancement) -->
+    <div vw class="enabled" id="vlibras-official-container">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- IVI - INTELIGÊNCIA ARTIFICIAL BANPARÁ (Fiel às Imagens) -->
+    <!-- Disponível exclusivamente no Portal do Usuário           -->
+    <!-- ======================================================== -->
+
+    <!-- 1. MASCOTE OFICIAL DA IVI NO CANTO INFERIOR DIREITO (Fiel à imagem oficial do site Banpará) -->
+    <div id="ivi-floating-trigger"
+        class="fixed bottom-2 right-2 sm:bottom-4 sm:right-6 z-40 select-none pointer-events-auto cursor-pointer group"
+        onclick="toggleIVIChat()"
+        title="Abrir chat com a IVI - Assistente Virtual Banpará">
+        
+        <div class="relative transition-transform duration-300 hover:scale-105 active:scale-95">
+            <!-- Brilho neon suave sob o propulsor da IVI -->
+            <div class="absolute bottom-2 right-4 w-20 h-10 bg-cyan-400/25 blur-xl rounded-full group-hover:bg-cyan-400/40 transition-all pointer-events-none"></div>
+            
+            <!-- Imagem Oficial da IVI extraída do site Banpará (contendo o robô e o balão 'Posso Ajudar?') -->
+            <img src="ivi_oficial.png"
+                alt="IVI - Posso Ajudar? - Inteligência Artificial Banpará"
+                class="w-32 sm:w-40 h-auto object-contain ivi-floating drop-shadow-[0_10px_20px_rgba(0,35,80,0.3)] select-none pointer-events-none" />
+        </div>
+    </div>
+
+    <!-- 2. JANELA DE CHAT DA IVI (Fiel à Imagem 2) -->
+    <div id="ivi-chat-window"
+        class="fixed left-3 sm:left-6 bottom-3 sm:bottom-6 z-50 w-[350px] sm:w-[390px] h-[580px] max-h-[calc(100vh-32px)] bg-[#F0F4F8] rounded-2xl shadow-2xl border border-slate-300 overflow-hidden flex flex-col hidden transition-all duration-300">
+        
+        <!-- Cabeçalho do Chat (Azul Escuro #0F294A fiel à Imagem 2) -->
+        <div class="bg-[#0F294A] text-white px-3.5 py-2.5 flex items-center justify-between select-none shadow-md">
+            <div class="flex items-center gap-2.5">
+                <!-- Ícone Banpará Oficial -->
+                <div class="w-7 h-7 rounded-lg bg-white p-0.5 flex items-center justify-center shadow-xs flex-shrink-0">
+                    <img src="banpara_icon.png" alt="Banpará" class="w-full h-full object-contain" />
+                </div>
+                <!-- Símbolo de Acessibilidade -->
+                <div class="w-6 h-6 rounded-full bg-blue-900 border border-cyan-400/40 flex items-center justify-center text-white text-xs flex-shrink-0">
+                    <span>♿</span>
+                </div>
+                <div class="leading-tight">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-sm font-black text-white tracking-tight">IVI</span>
+                        <span class="text-[9px] bg-cyan-500/20 text-cyan-300 font-bold px-1.5 py-0.2 rounded">IA BANPARÁ</span>
+                    </div>
+                    <span class="text-[10px] text-slate-300 flex items-center gap-1 font-mono">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        chatbot.banpara.b.br
+                    </span>
+                </div>
+            </div>
+
+            <!-- Ações do Cabeçalho: Dock e Fechar -->
+            <div class="flex items-center gap-1">
+                <button type="button" onclick="dockIVIChat()" class="text-white/70 hover:text-white hover:bg-white/10 p-1.5 rounded-lg transition-colors cursor-pointer" title="Alternar lado da tela (Esquerda / Direita)">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                </button>
+                <button type="button" onclick="toggleIVIChat(false)" class="text-white/70 hover:text-white hover:bg-white/10 p-1.5 rounded-lg transition-colors cursor-pointer" title="Fechar chat da IVI">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Área de Conversação / Mensagens -->
+        <div id="ivi-chat-messages" class="flex-grow overflow-y-auto p-3.5 space-y-3 text-xs">
+            <!-- Mensagens são geradas dinamicamente via JS -->
+        </div>
+
+        <!-- Barra Inferior de Entrada de Texto (Fiel à Imagem 2) -->
+        <div class="bg-white border-t border-slate-200 p-2.5">
+            <form onsubmit="enviarMensagemIVI(event)" class="flex items-center gap-1.5 bg-slate-100 rounded-full px-3 py-1.5 border border-slate-200 focus-within:border-cyan-500 focus-within:bg-white transition-all">
+                <input type="text" id="ivi-input-text" placeholder="Escrever..." class="flex-grow bg-transparent text-xs text-slate-800 placeholder-slate-400 focus:outline-none" autocomplete="off" />
+                
+                <!-- Botão Enviar (Aviãozinho) -->
+                <button type="submit" class="w-7 h-7 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white flex items-center justify-center transition-colors shadow-xs cursor-pointer flex-shrink-0" title="Enviar mensagem">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+
+                <!-- Ícones de Ação (Fiel à Imagem 2: Localização, Anexo, Microfone, Emoji) -->
+                <div class="flex items-center gap-1 text-slate-400 pl-1 border-l border-slate-200 flex-shrink-0">
+                    <button type="button" onclick="simularLocalizacaoIVI()" class="hover:text-cyan-600 p-1 rounded transition-colors cursor-pointer" title="Agências mais próximas">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <button type="button" onclick="simularAnexoIVI()" class="hover:text-cyan-600 p-1 rounded transition-colors cursor-pointer" title="Enviar comprovante">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                        </svg>
+                    </button>
+                    <button type="button" onclick="simularVozIVI()" class="hover:text-cyan-600 p-1 rounded transition-colors cursor-pointer" title="Comando de voz">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <button type="button" onclick="inserirEmojiIVI('😊')" class="hover:text-cyan-600 p-1 rounded transition-colors cursor-pointer text-sm" title="Inserir emoji">
+                        😊
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         /* Estado global da aplicação */
         let currentPersonType = 'pf'; // 'pf' ou 'pj'
@@ -4818,6 +5147,11 @@
             } else {
                 if (headerEl) headerEl.classList.remove('hidden');
                 if (footerEl) footerEl.classList.remove('hidden');
+            }
+
+            // Controle estrito de visibilidade do VLibras (Apenas no Portal, Oculto no CRM)
+            if (typeof updateVLibrasVisibility === 'function') {
+                updateVLibrasVisibility(viewId);
             }
 
             views.forEach(id => {
@@ -6140,6 +6474,758 @@
             setTimeout(() => {
                 toast.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
             }, 3000);
+        }
+
+        /* ======================================================== */
+        /* PLUGIN DE ACESSIBILIDADE EM LIBRAS (VLIBRAS BANPARÁ)     */
+        /* Visível somente no Portal do Usuário, nunca no CRM       */
+        /* ======================================================== */
+        let vlibrasState = {
+            isOpen: false,
+            isPlaying: true,
+            speed: 1.0,
+            speedIdx: 1,
+            speeds: [0.5, 1.0, 1.5, 2.0],
+            speedLabels: ['0.5x', '1x', '1.5x', '2x'],
+            avatar: 'icaro', // 'icaro' ou 'hozana'
+            emotion: 'happy',
+            showCaptions: true,
+            isExpanded: false,
+            currentProgress: 0,
+            progressInterval: null,
+            signingInterval: null,
+            poseIndex: 1
+        };
+
+        function toggleVLibrasWidget(forceOpen) {
+            const modal = document.getElementById('vlibras-player-modal');
+            if (!modal) return;
+
+            // Restrição estrita: O plugin nunca abre nem aparece nas telas de CRM
+            if (currentActiveView === 'view-voxdata-crm' || currentActiveView === 'view-voxdata-atendimento') {
+                return;
+            }
+
+            if (forceOpen === true) {
+                vlibrasState.isOpen = true;
+            } else if (forceOpen === false) {
+                vlibrasState.isOpen = false;
+            } else {
+                vlibrasState.isOpen = !vlibrasState.isOpen;
+            }
+
+            if (vlibrasState.isOpen) {
+                modal.classList.remove('hidden');
+                iniciarAnimacaoSinaisVLibras('Bem-vindo ao Portal de Soluções Banpará.');
+                showToast('Intérprete VLibras aberto.');
+            } else {
+                modal.classList.add('hidden');
+                pararAnimacaoSinaisVLibras();
+            }
+        }
+
+        function abrirDemonstracaoVLibras(texto) {
+            toggleVLibrasWidget(true);
+            if (texto) {
+                traduzirTextoVLibras(texto);
+            }
+        }
+
+        function fecharDemonstracaoVLibras() {
+            toggleVLibrasWidget(false);
+        }
+
+        function toggleVLibrasMenu(e) {
+            if (e) e.stopPropagation();
+            const menu = document.getElementById('vlibras-dropdown-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function toggleVLibrasTamanho() {
+            const modal = document.getElementById('vlibras-player-modal');
+            const viewport = document.getElementById('vlibras-avatar-viewport');
+            const iconExpand = document.getElementById('vlibras-icon-expand');
+            if (!modal || !viewport) return;
+
+            vlibrasState.isExpanded = !vlibrasState.isExpanded;
+            if (vlibrasState.isExpanded) {
+                modal.classList.add('w-[420px]', 'sm:w-[460px]');
+                modal.classList.remove('w-[350px]', 'sm:w-[380px]');
+                viewport.classList.remove('h-[370px]');
+                viewport.classList.add('h-[440px]');
+                showToast('Janela VLibras expandida');
+            } else {
+                modal.classList.remove('w-[420px]', 'sm:w-[460px]');
+                modal.classList.add('w-[350px]', 'sm:w-[380px]');
+                viewport.classList.add('h-[370px]');
+                viewport.classList.remove('h-[440px]');
+                showToast('Janela VLibras normalizada');
+            }
+        }
+
+        function trocarAvatarVLibras(avatar) {
+            vlibrasState.avatar = avatar;
+            const img = document.getElementById('vlibras-avatar-img');
+            const btnIcaro = document.getElementById('btn-avatar-icaro');
+            const btnHozana = document.getElementById('btn-avatar-hozana');
+
+            if (avatar === 'hozana') {
+                if (img) img.src = 'vlibras_avatar_hozana.jpg';
+                if (btnHozana) {
+                    btnHozana.className = 'px-2 py-1.5 rounded bg-blue-600 text-white font-semibold text-center cursor-pointer flex items-center justify-center gap-1';
+                }
+                if (btnIcaro) {
+                    btnIcaro.className = 'px-2 py-1.5 rounded bg-slate-800 text-slate-300 font-semibold text-center hover:bg-slate-700 cursor-pointer flex items-center justify-center gap-1';
+                }
+            } else {
+                if (img) img.src = 'vlibras_avatar_1.jpg';
+                if (btnIcaro) {
+                    btnIcaro.className = 'px-2 py-1.5 rounded bg-blue-600 text-white font-semibold text-center cursor-pointer flex items-center justify-center gap-1';
+                }
+                if (btnHozana) {
+                    btnHozana.className = 'px-2 py-1.5 rounded bg-slate-800 text-slate-300 font-semibold text-center hover:bg-slate-700 cursor-pointer flex items-center justify-center gap-1';
+                }
+            }
+
+            const menu = document.getElementById('vlibras-dropdown-menu');
+            if (menu) menu.classList.add('hidden');
+            showToast(`Avatar alterado para ${avatar === 'hozana' ? 'Hozana' : 'Ícaro'}!`);
+        }
+
+        function traduzirTextoVLibras(texto) {
+            if (!vlibrasState.isOpen) {
+                toggleVLibrasWidget(true);
+            }
+            const menu = document.getElementById('vlibras-dropdown-menu');
+            if (menu) menu.classList.add('hidden');
+            iniciarAnimacaoSinaisVLibras(texto);
+        }
+
+        function iniciarAnimacaoSinaisVLibras(texto) {
+            const legenda = document.getElementById('vlibras-legenda-texto');
+            if (legenda) legenda.innerText = texto || 'Interpretando em Libras...';
+
+            const pBar = document.getElementById('vlibras-progress-bar');
+            vlibrasState.currentProgress = 0;
+            if (pBar) pBar.style.width = '0%';
+
+            if (vlibrasState.progressInterval) clearInterval(vlibrasState.progressInterval);
+            if (vlibrasState.signingInterval) clearInterval(vlibrasState.signingInterval);
+
+            vlibrasState.isPlaying = true;
+            atualizarIconePlayPause();
+
+            const duration = Math.max(3000, (texto || '').length * 90) / vlibrasState.speed;
+            const stepTime = 100;
+            const increment = 100 / (duration / stepTime);
+
+            vlibrasState.progressInterval = setInterval(() => {
+                if (!vlibrasState.isPlaying) return;
+                vlibrasState.currentProgress += increment;
+                if (vlibrasState.currentProgress >= 100) {
+                    vlibrasState.currentProgress = 100;
+                    if (pBar) pBar.style.width = '100%';
+                    clearInterval(vlibrasState.progressInterval);
+                    finalizarSinalizacaoVLibras();
+                } else {
+                    if (pBar) pBar.style.width = `${vlibrasState.currentProgress}%`;
+                }
+            }, stepTime);
+
+            // Micro-animação simulando sinalização contínua do avatar
+            const img = document.getElementById('vlibras-avatar-img');
+            const wrapper = document.getElementById('vlibras-avatar-wrapper');
+            let pose = 1;
+            vlibrasState.signingInterval = setInterval(() => {
+                if (!vlibrasState.isPlaying) return;
+                if (vlibrasState.avatar === 'icaro') {
+                    pose = pose === 1 ? 2 : 1;
+                    if (img) img.src = `vlibras_avatar_${pose}.jpg`;
+                }
+                if (wrapper) {
+                    wrapper.style.transform = `scale(${1 + (Math.random() * 0.02 - 0.01)}) translateY(${Math.random() * 3 - 1.5}px)`;
+                }
+            }, 1100 / vlibrasState.speed);
+        }
+
+        function pararAnimacaoSinaisVLibras() {
+            if (vlibrasState.progressInterval) clearInterval(vlibrasState.progressInterval);
+            if (vlibrasState.signingInterval) clearInterval(vlibrasState.signingInterval);
+            const wrapper = document.getElementById('vlibras-avatar-wrapper');
+            if (wrapper) wrapper.style.transform = 'none';
+        }
+
+        function finalizarSinalizacaoVLibras() {
+            pararAnimacaoSinaisVLibras();
+            vlibrasState.isPlaying = false;
+            atualizarIconePlayPause();
+            const img = document.getElementById('vlibras-avatar-img');
+            if (img && vlibrasState.avatar === 'icaro') {
+                img.src = 'vlibras_avatar_1.jpg';
+            }
+        }
+
+        function pularSinalizacaoVLibras() {
+            const pBar = document.getElementById('vlibras-progress-bar');
+            if (pBar) pBar.style.width = '100%';
+            finalizarSinalizacaoVLibras();
+            showToast('Interpretação concluída.');
+        }
+
+        function togglePlayPauseVLibras() {
+            vlibrasState.isPlaying = !vlibrasState.isPlaying;
+            atualizarIconePlayPause();
+        }
+
+        function atualizarIconePlayPause() {
+            const iconPlay = document.getElementById('vlibras-icon-play');
+            const iconPause = document.getElementById('vlibras-icon-pause');
+            if (!iconPlay || !iconPause) return;
+            if (vlibrasState.isPlaying) {
+                iconPlay.classList.add('hidden');
+                iconPause.classList.remove('hidden');
+            } else {
+                iconPlay.classList.remove('hidden');
+                iconPause.classList.add('hidden');
+            }
+        }
+
+        function ciclarVelocidadeVLibras() {
+            vlibrasState.speedIdx = (vlibrasState.speedIdx + 1) % vlibrasState.speeds.length;
+            vlibrasState.speed = vlibrasState.speeds[vlibrasState.speedIdx];
+            const lbl = document.getElementById('vlibras-speed-label');
+            if (lbl) lbl.innerText = vlibrasState.speedLabels[vlibrasState.speedIdx];
+            showToast(`Velocidade de sinais: ${vlibrasState.speedLabels[vlibrasState.speedIdx]}`);
+        }
+
+        function toggleEmocaoVLibras() {
+            const icon = document.getElementById('vlibras-emotion-icon');
+            if (!icon) return;
+            if (vlibrasState.emotion === 'happy') {
+                vlibrasState.emotion = 'focused';
+                icon.innerText = '🧐';
+                showToast('Expressão facial: Focada');
+            } else {
+                vlibrasState.emotion = 'happy';
+                icon.innerText = '😊';
+                showToast('Expressão facial: Amigável');
+            }
+        }
+
+        function toggleLegendaVLibras() {
+            const container = document.getElementById('vlibras-legenda-container');
+            if (!container) return;
+            vlibrasState.showCaptions = !vlibrasState.showCaptions;
+            if (vlibrasState.showCaptions) {
+                container.classList.remove('opacity-0');
+                showToast('Legenda de sinais visível');
+            } else {
+                container.classList.add('opacity-0');
+                showToast('Legenda oculta');
+            }
+        }
+
+        function seekVLibrasProgress(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const pct = Math.max(0, Math.min(100, (clickX / rect.width) * 100));
+            vlibrasState.currentProgress = pct;
+            const pBar = document.getElementById('vlibras-progress-bar');
+            if (pBar) pBar.style.width = `${pct}%`;
+        }
+
+        // Isolamento de Visibilidade: Visível SOMENTE no Portal do Usuário, NUNCA no CRM
+        function updateVLibrasVisibility(viewId) {
+            updatePortalWidgetsVisibility(viewId);
+        }
+
+        function updatePortalWidgetsVisibility(viewId) {
+            const isCRM = (viewId === 'view-voxdata-atendimento' || viewId === 'view-voxdata-crm');
+            
+            // 1. Elementos do VLibras
+            const launcher = document.getElementById('vlibras-demo-launcher');
+            const modal = document.getElementById('vlibras-player-modal');
+            const officialContainer = document.getElementById('vlibras-official-container');
+            const utilityBar = document.getElementById('portal-top-utility-bar');
+
+            // 2. Elementos da IVI (IA Banpará)
+            const iviTrigger = document.getElementById('ivi-floating-trigger');
+            const iviChatWindow = document.getElementById('ivi-chat-window');
+
+            if (isCRM) {
+                // Oculta VLibras
+                if (launcher) launcher.classList.add('hidden');
+                if (modal) {
+                    modal.classList.add('hidden');
+                    pararAnimacaoSinaisVLibras();
+                    vlibrasState.isOpen = false;
+                }
+                if (officialContainer) officialContainer.style.display = 'none';
+                if (utilityBar) utilityBar.classList.add('hidden');
+
+                // Oculta IVI no CRM
+                if (iviTrigger) iviTrigger.classList.add('hidden');
+                if (iviChatWindow) {
+                    iviChatWindow.classList.add('hidden');
+                    iviState.isOpen = false;
+                }
+            } else {
+                // Exibe no Portal
+                if (launcher) launcher.classList.remove('hidden');
+                if (utilityBar) utilityBar.classList.remove('hidden');
+                if (officialContainer) officialContainer.style.display = '';
+
+                // Exibe IVI no Portal
+                if (iviTrigger) iviTrigger.classList.remove('hidden');
+            }
+        }
+
+        // Interatividade: Ao selecionar texto com o mouse no Portal, o VLibras interpreta automaticamente
+        document.addEventListener('mouseup', () => {
+            if (!vlibrasState.isOpen) return;
+            const sel = window.getSelection().toString().trim();
+            if (sel && sel.length >= 3 && sel.length <= 180) {
+                traduzirTextoVLibras(sel);
+            }
+        });
+
+        /* ======================================================== */
+        /* IVI - MOTOR DE CHAT E SIMULAÇÃO DE IA BANPARÁ            */
+        /* Fiel às Telas 1 e 2 do Chatbot Banpará                   */
+        /* ======================================================== */
+        let iviState = {
+            isOpen: false,
+            isDockedLeft: true,
+            hasInitialized: false,
+            messageCount: 0
+        };
+
+        function toggleIVIChat(forceOpen) {
+            const chatWin = document.getElementById('ivi-chat-window');
+            if (!chatWin) return;
+
+            // Nunca abre nas telas de CRM
+            if (currentActiveView === 'view-voxdata-crm' || currentActiveView === 'view-voxdata-atendimento') {
+                return;
+            }
+
+            if (forceOpen === true) {
+                iviState.isOpen = true;
+            } else if (forceOpen === false) {
+                iviState.isOpen = false;
+            } else {
+                iviState.isOpen = !iviState.isOpen;
+            }
+
+            if (iviState.isOpen) {
+                chatWin.classList.remove('hidden');
+                if (!iviState.hasInitialized) {
+                    renderizarMensagensIniciaisIVI();
+                    iviState.hasInitialized = true;
+                }
+                setTimeout(() => {
+                    const inp = document.getElementById('ivi-input-text');
+                    if (inp) inp.focus();
+                    scrollIVIToBottom();
+                }, 100);
+            } else {
+                chatWin.classList.add('hidden');
+            }
+        }
+
+        function dockIVIChat() {
+            const chatWin = document.getElementById('ivi-chat-window');
+            if (!chatWin) return;
+            iviState.isDockedLeft = !iviState.isDockedLeft;
+            if (iviState.isDockedLeft) {
+                chatWin.classList.remove('right-3', 'sm:right-6');
+                chatWin.classList.add('left-3', 'sm:left-6');
+                showToast('Janela IVI fixada à esquerda');
+            } else {
+                chatWin.classList.remove('left-3', 'sm:left-6');
+                chatWin.classList.add('right-3', 'sm:right-6');
+                showToast('Janela IVI fixada à direita');
+            }
+        }
+
+        function obterHoraAtualFormatada() {
+            const agora = new Date();
+            const h = String(agora.getHours()).padStart(2, '0');
+            const m = String(agora.getMinutes()).padStart(2, '0');
+            return `${h}:${m}`;
+        }
+
+        function renderizarMensagensIniciaisIVI() {
+            const container = document.getElementById('ivi-chat-messages');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const hora = obterHoraAtualFormatada();
+
+            // Mensagem 1 Inicial (Fiel à Imagem 2)
+            adicionarMensagemIVIBubble('Oii...!! sou a Ivi, assistente virtual do BANPARÁ. Com o que posso te ajudar hoje?', hora);
+
+            // Mensagem 2 com Temas (Fiel à Imagem 2)
+            setTimeout(() => {
+                const textoTemas = `
+                    <p class="font-medium text-slate-800 mb-1.5">Que bom falar com você!</p>
+                    <p class="text-slate-600 mb-2 leading-relaxed">Digite o tema desejado ou escreva com suas palavras o que você precisa. Vou fazer o possível para te ajudar!</p>
+                    <div class="bg-blue-50/70 p-2.5 rounded-xl border border-blue-100 mb-2">
+                        <span class="font-bold text-blue-900 block mb-1">📌 Alguns temas que posso te ajudar:</span>
+                        <ul class="space-y-0.5 text-slate-700 pl-1">
+                            <li>• Cartão de crédito</li>
+                            <li>• Empréstimos</li>
+                            <li>• Pix</li>
+                            <li>• Aplicativo Banpará</li>
+                            <li>• Negociação de dívida</li>
+                            <li>• Investimentos</li>
+                            <li>• Orientações sobre Fraudes</li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 pt-1">
+                        <button type="button" onclick="selecionarTemaRapidoIVI('Negociação de dívida')" class="bg-white hover:bg-cyan-50 text-cyan-800 hover:text-cyan-900 border border-cyan-200 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-2xs transition-all cursor-pointer">
+                            🤝 Negociação de dívida
+                        </button>
+                        <button type="button" onclick="selecionarTemaRapidoIVI('Empréstimos')" class="bg-white hover:bg-cyan-50 text-cyan-800 hover:text-cyan-900 border border-cyan-200 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-2xs transition-all cursor-pointer">
+                            💰 Empréstimos
+                        </button>
+                        <button type="button" onclick="selecionarTemaRapidoIVI('Cartão de crédito')" class="bg-white hover:bg-cyan-50 text-cyan-800 hover:text-cyan-900 border border-cyan-200 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-2xs transition-all cursor-pointer">
+                            💳 Cartão de crédito
+                        </button>
+                        <button type="button" onclick="selecionarTemaRapidoIVI('Pix')" class="bg-white hover:bg-cyan-50 text-cyan-800 hover:text-cyan-900 border border-cyan-200 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-2xs transition-all cursor-pointer">
+                            ⚡ Pix
+                        </button>
+                        <button type="button" onclick="selecionarTemaRapidoIVI('Aplicativo Banpará')" class="bg-white hover:bg-cyan-50 text-cyan-800 hover:text-cyan-900 border border-cyan-200 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-2xs transition-all cursor-pointer">
+                            📱 Aplicativo
+                        </button>
+                        <button type="button" onclick="selecionarTemaRapidoIVI('Investimentos')" class="bg-white hover:bg-cyan-50 text-cyan-800 hover:text-cyan-900 border border-cyan-200 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-2xs transition-all cursor-pointer">
+                            📈 Investimentos
+                        </button>
+                        <button type="button" onclick="selecionarTemaRapidoIVI('Orientações sobre Fraudes')" class="bg-white hover:bg-cyan-50 text-cyan-800 hover:text-cyan-900 border border-cyan-200 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-2xs transition-all cursor-pointer">
+                            🛡️ Fraudes
+                        </button>
+                    </div>
+                `;
+                adicionarMensagemIVIBubble(textoTemas, hora);
+            }, 300);
+        }
+
+        function adicionarMensagemIVIBubble(conteudoHtml, hora) {
+            const container = document.getElementById('ivi-chat-messages');
+            if (!container) return;
+            const horaMsg = hora || obterHoraAtualFormatada();
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'flex items-start gap-2.5 fade-in';
+            msgDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full overflow-hidden border border-cyan-400/50 shadow-xs flex-shrink-0 bg-blue-950 flex items-center justify-center p-0.5">
+                    <img src="ivi_head_oficial.png" alt="IVI" class="w-full h-full object-contain" />
+                </div>
+                <div class="flex-grow max-w-[85%]">
+                    <div class="flex items-center gap-1.5 mb-1">
+                        <span class="font-black text-slate-800 text-[11px]">IVI</span>
+                        <span class="text-[10px] text-slate-400 font-mono">${horaMsg}</span>
+                    </div>
+                    <div class="bg-white rounded-2xl rounded-tl-xs p-3 shadow-xs border border-slate-200/70 text-xs text-slate-700 leading-relaxed">
+                        ${conteudoHtml}
+                    </div>
+                </div>
+            `;
+            container.appendChild(msgDiv);
+            scrollIVIToBottom();
+        }
+
+        function adicionarMensagemUsuario(texto) {
+            const container = document.getElementById('ivi-chat-messages');
+            if (!container) return;
+            const hora = obterHoraAtualFormatada();
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'flex items-start justify-end gap-2 fade-in';
+            msgDiv.innerHTML = `
+                <div class="max-w-[80%] flex flex-col items-end">
+                    <div class="flex items-center gap-1.5 mb-1">
+                        <span class="text-[10px] text-slate-400 font-mono">${hora}</span>
+                        <span class="font-bold text-slate-700 text-[11px]">Você</span>
+                    </div>
+                    <div class="bg-cyan-600 text-white rounded-2xl rounded-tr-xs p-2.5 shadow-xs text-xs leading-relaxed">
+                        ${texto}
+                    </div>
+                </div>
+            `;
+            container.appendChild(msgDiv);
+            scrollIVIToBottom();
+        }
+
+        function exibirIndicadorDigitacaoIVI() {
+            removerIndicadorDigitacaoIVI();
+            const container = document.getElementById('ivi-chat-messages');
+            if (!container) return;
+
+            const div = document.createElement('div');
+            div.id = 'ivi-typing-indicator';
+            div.className = 'flex items-center gap-2 text-slate-500 text-[11px] py-1 fade-in';
+            div.innerHTML = `
+                <div class="w-6 h-6 rounded-full overflow-hidden border border-cyan-400/30 flex-shrink-0 bg-blue-950 flex items-center justify-center p-0.5">
+                    <img src="ivi_head_oficial.png" alt="IVI" class="w-full h-full object-contain" />
+                </div>
+                <div class="bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-2xs flex items-center gap-1">
+                    <span class="text-cyan-700 font-medium">IVI digitando</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-bounce"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-bounce [animation-delay:0.2s]"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-bounce [animation-delay:0.4s]"></span>
+                </div>
+            `;
+            container.appendChild(div);
+            scrollIVIToBottom();
+        }
+
+        function removerIndicadorDigitacaoIVI() {
+            const ind = document.getElementById('ivi-typing-indicator');
+            if (ind) ind.remove();
+        }
+
+        function scrollIVIToBottom() {
+            const container = document.getElementById('ivi-chat-messages');
+            if (container) {
+                container.scrollTop = container.scrollHeight;
+            }
+        }
+
+        function selecionarTemaRapidoIVI(tema) {
+            adicionarMensagemUsuario(tema);
+            exibirIndicadorDigitacaoIVI();
+            setTimeout(() => {
+                processarRespostaIA_IVI(tema);
+            }, 600);
+        }
+
+        function enviarMensagemIVI(e) {
+            if (e) e.preventDefault();
+            const input = document.getElementById('ivi-input-text');
+            if (!input) return;
+            const texto = input.value.trim();
+            if (!texto) return;
+
+            adicionarMensagemUsuario(texto);
+            input.value = '';
+            exibirIndicadorDigitacaoIVI();
+
+            setTimeout(() => {
+                processarRespostaIA_IVI(texto);
+            }, 750);
+        }
+
+        function processarRespostaIA_IVI(pergunta) {
+            removerIndicadorDigitacaoIVI();
+            const termo = pergunta.toLowerCase();
+            let resposta = '';
+
+            if (termo.includes('negocia') || termo.includes('dívida') || termo.includes('divida') || termo.includes('atraso') || termo.includes('acordo')) {
+                resposta = `
+                    <div class="space-y-2">
+                        <div class="font-bold text-slate-900 flex items-center gap-1.5 text-cyan-800">
+                            <span>🤝</span>
+                            <span>Renegociação de Dívidas Banpará</span>
+                        </div>
+                        <p>No <strong>Portal de Soluções Banpará</strong> você conta com condições imperdíveis para regularizar sua vida financeira:</p>
+                        <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl text-emerald-900">
+                            <span class="block font-bold text-xs">✨ Vantagens Exclusivas:</span>
+                            <ul class="text-[11px] list-disc list-inside space-y-0.5 mt-1">
+                                <li><strong>Até 90% de desconto</strong> para quitação à vista;</li>
+                                <li>Parcelamento flexível em até <strong>72 meses</strong>;</li>
+                                <li>Retirada de restrições (SPC/Serasa) em até 5 dias úteis após pagamento da entrada.</li>
+                            </ul>
+                        </div>
+                        <div class="pt-1">
+                            <button onclick="toggleIVIChat(false); showView('view-home'); document.getElementById('input-cpf').focus();" class="w-full py-2 bg-bp-red hover:bg-bp-redDark text-white font-bold rounded-xl text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-1.5">
+                                <span>🔍</span>
+                                <span>Consultar Meu CPF no Portal</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (termo.includes('empréstimo') || termo.includes('emprestimo') || termo.includes('crédito') || termo.includes('credito') || termo.includes('consignado')) {
+                resposta = `
+                    <div class="space-y-2">
+                        <div class="font-bold text-cyan-800 flex items-center gap-1.5">
+                            <span>💰</span>
+                            <span>Crédito & Empréstimos Banpará</span>
+                        </div>
+                        <p>Temos soluções sob medida para suas conquistas:</p>
+                        <div class="bg-blue-50 border border-blue-200 p-2 rounded-xl text-[11px] text-blue-950 space-y-1">
+                            <p>• <strong>Consignado Servidor:</strong> As menores taxas do mercado e desconto direto em folha.</p>
+                            <p>• <strong>Crédito Pessoal Automático:</strong> Liberação imediata pelo App Banpará.</p>
+                            <p>• <strong>Crédito Imobiliário & Veículos:</strong> Prazos estendidos e taxas competitivas.</p>
+                        </div>
+                        <p class="text-[11px] text-slate-500">Quer fazer uma simulação? Acesse a área de crédito ou visite uma agência mais próxima!</p>
+                    </div>
+                `;
+            } else if (termo.includes('cartão') || termo.includes('cartao') || termo.includes('fatura') || termo.includes('limite')) {
+                resposta = `
+                    <div class="space-y-1.5">
+                        <div class="font-bold text-cyan-800 flex items-center gap-1.5">
+                            <span>💳</span>
+                            <span>Cartões Banpará Mastercard & Visa</span>
+                        </div>
+                        <p>Para gerenciar seu cartão:</p>
+                        <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 text-[11px] space-y-1">
+                            <p>• <strong>2ª via de fatura:</strong> Disponível no App Banpará ou Internet Banking.</p>
+                            <p>• <strong>Limite e Melhor Dia:</strong> Consulte no menu "Cartões" do aplicativo.</p>
+                            <p>• <strong>Bloqueio de Emergência:</strong> Central 24h: <strong>0800 280 6605</strong>.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (termo.includes('pix') || termo.includes('chave') || termo.includes('transferência') || termo.includes('transferencia')) {
+                resposta = `
+                    <div class="space-y-1.5">
+                        <div class="font-bold text-cyan-800 flex items-center gap-1.5">
+                            <span>⚡</span>
+                            <span>Pix no Banpará</span>
+                        </div>
+                        <p>O Pix Banpará é instantâneo, seguro e disponível 24 horas todos os dias!</p>
+                        <p class="text-[11px] text-slate-600">Pelo App Banpará você pode cadastrar suas chaves (CPF, celular, e-mail ou aleatória), agendar pagamentos e ajustar seus limites de segurança.</p>
+                    </div>
+                `;
+            } else if (termo.includes('app') || termo.includes('aplicativo') || termo.includes('celular') || termo.includes('token') || termo.includes('biometria')) {
+                resposta = `
+                    <div class="space-y-1.5">
+                        <div class="font-bold text-cyan-800 flex items-center gap-1.5">
+                            <span>📱</span>
+                            <span>Aplicativo Banpará</span>
+                        </div>
+                        <p>O App oficial do Banpará está disponível para <strong>Android</strong> e <strong>iOS</strong> com máxima segurança:</p>
+                        <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 text-[11px] space-y-1">
+                            <p>✔️ Acesso por biometria facial e digital</p>
+                            <p>✔️ Token de segurança integrado</p>
+                            <p>✔️ Pagamento de boletos, Pix e transferências</p>
+                        </div>
+                    </div>
+                `;
+            } else if (termo.includes('investimento') || termo.includes('cdb') || termo.includes('lci') || termo.includes('poupança') || termo.includes('poupanca') || termo.includes('fgc')) {
+                resposta = `
+                    <div class="space-y-1.5">
+                        <div class="font-bold text-cyan-800 flex items-center gap-1.5">
+                            <span>📈</span>
+                            <span>Investimentos Banpará</span>
+                        </div>
+                        <p>Seu dinheiro rende com a solidez do Banco do Estado do Pará:</p>
+                        <div class="bg-blue-50 border border-blue-200 p-2 rounded-xl text-[11px] text-blue-950 space-y-1">
+                            <p>🛡️ <strong>Garantia do FGC:</strong> Suas aplicações e contas são cobertas pelo Fundo Garantidor de Créditos até R$ 250.000 por CPF/CNPJ.</p>
+                            <p>📊 <strong>CDBs & LCIs:</strong> Rentabilidade acima do CDI com segurança e liquidez.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (termo.includes('fraude') || termo.includes('golpe') || termo.includes('segurança') || termo.includes('seguranca')) {
+                resposta = `
+                    <div class="space-y-2">
+                        <div class="font-bold text-rose-700 flex items-center gap-1.5">
+                            <span>🛡️</span>
+                            <span>Orientações de Segurança Banpará</span>
+                        </div>
+                        <div class="bg-rose-50 border border-rose-200 p-2.5 rounded-xl text-[11px] text-rose-950 space-y-1">
+                            <p><strong>⚠️ FIQUE ATENTO:</strong></p>
+                            <p>• O Banpará <strong>NUNCA</strong> solicita senhas, tokens ou dados confidenciais por telefone, SMS ou WhatsApp.</p>
+                            <p>• Nunca realizamos transferências ou testes de Pix.</p>
+                            <p>• Em caso de suspeita, contate o SAC Oficial: <strong>0800 280 6605</strong>.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (termo.includes('olá') || termo.includes('ola') || termo.includes('oi') || termo.includes('bom dia') || termo.includes('boa tarde')) {
+                resposta = `
+                    <p>Olá! Que alegria falar com você! 😊</p>
+                    <p class="mt-1">Sou a <strong>IVI</strong>, inteligência artificial do Banpará. Como posso tornar seu dia mais fácil hoje? Você pode me perguntar sobre renegociação de dívidas, empréstimos, cartões ou serviços do portal!</p>
+                `;
+            } else {
+                resposta = `
+                    <div class="space-y-1.5">
+                        <p>Entendi sua dúvida sobre <em>"${pergunta}"</em>!</p>
+                        <p class="text-slate-600">Como assistente virtual do Banpará, posso te ajudar diretamente com nossos serviços digitais. Escolha uma das opções abaixo ou formule sua pergunta com outras palavras:</p>
+                        <div class="flex flex-wrap gap-1 pt-1">
+                            <button type="button" onclick="selecionarTemaRapidoIVI('Negociação de dívida')" class="bg-blue-50 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full hover:bg-blue-100 cursor-pointer">
+                                🤝 Negociar débitos
+                            </button>
+                            <button type="button" onclick="selecionarTemaRapidoIVI('Empréstimos')" class="bg-blue-50 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full hover:bg-blue-100 cursor-pointer">
+                                💰 Empréstimos
+                            </button>
+                            <button type="button" onclick="selecionarTemaRapidoIVI('Orientações sobre Fraudes')" class="bg-rose-50 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-full hover:bg-rose-100 cursor-pointer">
+                                🛡️ Dúvidas de Segurança
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            adicionarMensagemIVIBubble(resposta);
+        }
+
+        function simularLocalizacaoIVI() {
+            adicionarMensagemUsuario('📍 Onde encontro uma agência Banpará próxima?');
+            exibirIndicadorDigitacaoIVI();
+            setTimeout(() => {
+                removerIndicadorDigitacaoIVI();
+                const resp = `
+                    <div class="space-y-1.5">
+                        <div class="font-bold text-cyan-800 flex items-center gap-1">
+                            <span>📍</span>
+                            <span>Agências Banpará em Destaque:</span>
+                        </div>
+                        <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 text-[11px] space-y-1 text-slate-700">
+                            <p>🏛️ <strong>Agência Matriz:</strong> Av. Pres. Vargas, 251 - Campina, Belém - PA</p>
+                            <p>🏛️ <strong>Agência Nazaré:</strong> Av. Nazaré, 669 - Belém - PA</p>
+                            <p>🏛️ <strong>Agência São Brás:</strong> Av. Gov. José Malcher, 2600 - Belém - PA</p>
+                            <p>🏛️ Presente em <strong>144 municípios</strong> em todo o estado do Pará!</p>
+                        </div>
+                    </div>
+                `;
+                adicionarMensagemIVIBubble(resp);
+            }, 600);
+        }
+
+        function simularAnexoIVI() {
+            adicionarMensagemUsuario('📎 [Documento anexado: comprovante_pagamento.pdf]');
+            exibirIndicadorDigitacaoIVI();
+            setTimeout(() => {
+                removerIndicadorDigitacaoIVI();
+                adicionarMensagemIVIBubble('Recebi seu documento simulado com sucesso! ✅ No portal do cliente ele é criptografado e encaminhado com validação bancária automática.');
+            }, 600);
+        }
+
+        function simularVozIVI() {
+            const input = document.getElementById('ivi-input-text');
+            if (input) {
+                input.value = 'Gostaria de negociar minhas dívidas no Banpará';
+                showToast('Comando de voz simulado capturado');
+                setTimeout(() => {
+                    enviarMensagemIVI();
+                }, 300);
+            }
+        }
+
+        function inserirEmojiIVI(emoji) {
+            const input = document.getElementById('ivi-input-text');
+            if (input) {
+                input.value += emoji;
+                input.focus();
+            }
+        }
+
+        // Inicialização com estado padrão
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePortalWidgetsVisibility(currentActiveView || 'view-home');
+        });
+        updatePortalWidgetsVisibility('view-home');
+    </script>
+
+    <!-- Integração do Script Oficial do VLibras com carregamento seguro -->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        try {
+            if (window.VLibras && window.VLibras.Widget) {
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+            }
+        } catch (err) {
+            console.log('VLibras oficial carregado com fallback local integrado:', err);
         }
     </script>
 </body>
